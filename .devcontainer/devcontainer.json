@@ -1,0 +1,28 @@
+{
+  "name": "DotNet + Node + TypeScript Dev",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "8.0"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22.17.0"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "locale": "en"
+      },
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "postCreateCommand": "dotnet --version && node --version && npm update && npm install -g typescript@^5.8.0 jest ts-jest",
+  "forwardPorts": [3000, 5000]
+}

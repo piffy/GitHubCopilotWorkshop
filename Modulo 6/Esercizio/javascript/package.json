@@ -1,0 +1,13 @@
+{
+  "name": "random-user-api",
+  "version": "1.0.0",
+  "description": "Random User Data Skillset Web API in Node.js (Modulo 6)",
+  "main": "randomUserApi.js",
+  "scripts": {
+    "start": "node randomUserApi.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  }
+}
