@@ -1,44 +1,75 @@
-// TODO: Create a comprehensive task management system
-// The system should handle task creation, completion, deletion, and listing
-// Each task should have: id, title, description, completed status, created date
+// Sistema di gestione dei task: consente di creare, completare, eliminare e visualizzare task
 
+// Classe che rappresenta un singolo task
 class Task {
-    // Define the Task properties here
+    constructor(id, title, description, completed = false, createdDate = new Date()) {
+        // Controllo che nessun campo sia nullo
+        if (id == null) throw new Error('id non può essere nullo');
+        if (title == null) throw new Error('title non può essere nullo');
+        if (description == null) throw new Error('description non può essere nullo');
+        if (completed == null) throw new Error('completed non può essere nullo');
+        if (createdDate == null) throw new Error('createdDate non può essere nullo');
+
+        this.id = id; // Identificativo univoco del task
+        this.title = title; // Titolo del task
+        this.description = description; // Descrizione del task
+        this.completed = completed; // Stato di completamento (true/false)
+        this.createdDate = createdDate; // Data di creazione
+    }
 }
 
+// Classe che gestisce una lista di task
 class TaskManager {
     constructor() {
-        // Initialize the tasks list
+        this.tasks = []; // Lista dei task
+        this.nextId = 1; // Prossimo id disponibile per un nuovo task
     }
 
-    // Add a new task to the list
+    // Metodo per aggiungere un nuovo task
     addTask(title, description) {
-        // Implementation needed
+        if (title == null) throw new Error('title non può essere nullo');
+        if (description == null) throw new Error('description non può essere nullo');
+        const nuovoTask = new Task(this.nextId, title, description, false, new Date());
+        this.tasks.push(nuovoTask);
+        this.nextId++; // Incrementa l'id per il prossimo task
+        return nuovoTask;
     }
 
-    // Remove a task by its ID
+    // Metodo per rimuovere un task tramite id
     removeTask(id) {
-        // Implementation needed
+        const indice = this.tasks.findIndex(task => task.id === id);
+        if (indice === -1) {
+            // Nessun task trovato con quell'id
+            return false;
+        }
+        this.tasks.splice(indice, 1); // Rimuove il task dalla lista
+        return true;
     }
 
-    // Mark a task as completed
+    // Metodo per segnare un task come completato tramite id
     completeTask(id) {
-        // Implementation needed
+        const task = this.tasks.find(task => task.id === id);
+        if (!task) {
+            // Nessun task trovato con quell'id
+            return false;
+        }
+        task.completed = true;
+        return true;
     }
 
-    // Get all tasks
+    // Restituisce la lista di tutti i task
     getAllTasks() {
-        // Implementation needed
+        return [...this.tasks]; // Restituisce una copia della lista
     }
 
-    // Get only completed tasks
+    // Restituisce solo i task completati
     getCompletedTasks() {
-        // Implementation needed
+        return this.tasks.filter(task => task.completed);
     }
 
-    // Get only pending tasks
+    // Restituisce solo i task non completati
     getPendingTasks() {
-        // Implementation needed
+        return this.tasks.filter(task => !task.completed);
     }
 }
 
